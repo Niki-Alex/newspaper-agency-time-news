@@ -1,4 +1,5 @@
 from django.conf import settings
+from django.core.validators import MinValueValidator
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 # from django.urls import reverse
@@ -17,7 +18,7 @@ class Topic(models.Model):
 class Redactor(AbstractUser):
     years_of_experience = models.IntegerField(
         default=0,
-        validators=models.Min(0, message="Years of experience cannot be negative!")
+        validators=[MinValueValidator(0, message="Years of experience cannot be negative!")]
     )
 
     class Meta:
@@ -37,6 +38,9 @@ class Newspaper(models.Model):
     published_date = models.DateTimeField(auto_now_add=True)
     topic = models.ForeignKey(Topic, on_delete=models.CASCADE, related_name="newspapers")
     publishers = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name="newspapers")
+
+    class Meta:
+        ordering = ["title"]
 
     def __str__(self):
         return (
