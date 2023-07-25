@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>
+    Topic list
+  </h1>
+{#  {% include "includes/search_table.html" %}#}
+
+  {% if topic_list %}
+    <table class="table">
+      <tr>
+        <th>Name</th>
+      </tr>
+
+      {% for topic in topic_list %}
+        <tr>
+          <td>
+              {{ topic.name }}
+          </td>
+        </tr>
+      {% endfor %}
+    </table>
+
+  {% else %}
+      <p>There are no topic in the service.</p>
+  {% endif %}
+{% endblock %}

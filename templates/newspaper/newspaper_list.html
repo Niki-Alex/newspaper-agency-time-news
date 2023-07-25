@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>
+    Newspaper list
+  </h1>
+{#  {% include "includes/search_table.html" %}#}
+
+  {% if newspaper_list %}
+    <table class="table">
+      <tr>
+        <th>Title</th>
+        <th>Topic</th>
+        <th>Content</th>
+        <th>Published</th>
+        <th>Detail</th>
+      </tr>
+    {% for newspaper in newspaper_list %}
+      <tr>
+        <td>{{ newspaper.title }}</td>
+        <td>{{ newspaper.topic }}</td>
+        <td>{{ newspaper.content }}</td>
+        <td>{{ newspaper.published_date }}</td>
+        <td><a href="#">Detail</a></td>
+{#        <td><a href="{% url 'taxi:car-detail' pk=car.id %}">Detail</a></td>#}
+      </tr>
+    {% endfor %}
+    </table>
+  {% endif %}
+{% endblock %}
