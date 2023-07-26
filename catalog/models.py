@@ -40,7 +40,7 @@ class Newspaper(models.Model):
     publishers = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name="newspapers")
 
     class Meta:
-        ordering = ["title"]
+        ordering = ["-published_date"]
 
     def __str__(self):
         return (

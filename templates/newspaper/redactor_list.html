@@ -1,31 +1,176 @@
 {% extends "base.html" %}
+{% load static %}
+
+{% block title %} Redactor list {% endblock title %}
+
+{% block body %} class="blog-author bg-gray-100" {% endblock body %}
 
 {% block content %}
-  <h1>
-    Redactor list
-  </h1>
+
+  <!-- START Testimonials w/ user image & text & info -->
+  <section class="py-sm-7 py-5 position-relative">
+    <div class="container">
+      <div class="row">
+        <div class="col-12 mx-auto">
+          <div class="row py-lg-7 py-5">
+            <div class="col-lg-3 col-md-5 position-relative my-auto">
+              <img class="img border-radius-lg max-width-200 w-100 position-relative z-index-2" src="{% static 'img/photo/julia_1.jpg' %}" alt="julia">
+            </div>
+            <div class="col-lg-7 col-md-7 z-index-2 position-relative px-md-2 px-sm-5 mt-sm-0 mt-4">
+              <div class="d-flex justify-content-between align-items-center mb-2">
+                <h4 class="mb-0">Julia Yanovskaya</h4>
+              </div>
+              <div class="row mb-4">
+                <div class="col-auto">
+                  <span class="h6">152</span>
+                  <span>Posts</span>
+                </div>
+                <div class="col-auto">
+                  <span class="h6">3.5k</span>
+                  <span>Followers</span>
+                </div>
+                <div class="col-auto">
+                  <span class="h6">5+</span>
+                  <span>Rating</span>
+                </div>
+              </div>
+              <p class="text-lg mb-0">
+                Julia is an amazing person who is a pleasure to deal with!
+                She has incredible professionalism and knowledge in her field.
+                Always ready to help and answer any questions. Her friendliness
+                and positive attitude make her happy to communicate with her every time.
+                Julia is a true expert and working with her is a real pleasure.
+                I recommend her to everyone who is looking for a reliable partner and a
+                professional in their field! <br><a href="javascript:;" class="text-info icon-move-right">More about me
+                  <i class="fas fa-arrow-right text-sm ms-1"></i>
+                </a>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="row">
+        <div class="col-12 mx-auto">
+          <div class="row py-lg-7 py-5">
+            <div class="col-lg-3 col-md-5 position-relative my-auto">
+              <img class="img border-radius-lg max-width-200 w-100 position-relative z-index-2" src="{% static 'img/photo/black_widow.jpg' %}" alt="scarlett">
+            </div>
+            <div class="col-lg-7 col-md-7 z-index-2 position-relative px-md-2 px-sm-5 mt-sm-0 mt-4">
+              <div class="d-flex justify-content-between align-items-center mb-2">
+                <h4 class="mb-0">Scarlett Johansson</h4>
+              </div>
+              <div class="row mb-4">
+                <div class="col-auto">
+                  <span class="h6">124</span>
+                  <span>Posts</span>
+                </div>
+                <div class="col-auto">
+                  <span class="h6">1.5k</span>
+                  <span>Followers</span>
+                </div>
+                <div class="col-auto">
+                  <span class="h6">5</span>
+                  <span>Rating</span>
+                </div>
+              </div>
+              <p class="text-lg mb-0">
+                Scarlett is a real gem! Her unique talents and
+                unsurpassed skills are simply amazing. She is not
+                only a professional in her field, but also a person
+                with deep understanding and a sensitive heart.
+                Scarlett is always ready to support and inspire others
+                with her ideas and positive. Working with her is a real
+                pleasure and privilege. Without a doubt, I recommend
+                Scarlett as a reliable and talented professional,
+                with whom cooperation exceeds all expectations! <br><a href="javascript:;" class="text-info icon-move-right">More about me
+                  <i class="fas fa-arrow-right text-sm ms-1"></i>
+                </a>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="row">
+        <div class="col-12 mx-auto">
+          <div class="row py-lg-7 py-5">
+            <div class="col-lg-3 col-md-5 position-relative my-auto">
+              <img class="img border-radius-lg max-width-200 w-100 position-relative z-index-2" src="{% static 'img/photo/tom_hardi.jpeg' %}" alt="tom">
+            </div>
+            <div class="col-lg-7 col-md-7 z-index-2 position-relative px-md-2 px-sm-5 mt-sm-0 mt-4">
+              <div class="d-flex justify-content-between align-items-center mb-2">
+                <h4 class="mb-0">Tom Hardy</h4>
+              </div>
+              <div class="row mb-4">
+                <div class="col-auto">
+                  <span class="h6">86</span>
+                  <span>Posts</span>
+                </div>
+                <div class="col-auto">
+                  <span class="h6">2.7k</span>
+                  <span>Followers</span>
+                </div>
+                <div class="col-auto">
+                  <span class="h6">4+</span>
+                  <span>Rating</span>
+                </div>
+              </div>
+              <p class="text-lg mb-0">
+                Tom is a true professional! His dedication to
+                work and commitment to excellence is impressive.
+                He has a unique set of skills and is able to handle
+                the most complex tasks with ease. Tom is always ready
+                to support the team and shares his knowledge with others.
+                Working with him is inspiration and confidence in the
+                success of the project. I recommend Tom to anyone who is
+                looking for an experienced and responsible specialist who
+                is ready to bring the maximum benefit to his efforts! <br><a href="javascript:;" class="text-info icon-move-right">More about me
+                  <i class="fas fa-arrow-right text-sm ms-1"></i>
+                </a>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+{% endblock content %}
+
+
+
+{#{% extends "base.html" %}#}
+{##}
+{#{% block content %}#}
+{#  <h1>#}
+{#    Redactor list#}
+{#  </h1>#}
 {#  {% include "includes/search_table.html" %}#}
 
-  {% if redactor_list %}
-    <table class="table">
-      <tr>
-        <th>Username</th>
-        <th>First name</th>
-        <th>Last name</th>
-        <th>Experience</th>
-      </tr>
-    {% for redactor in redactor_list %}
-      <tr>
-        <td><a href="#">{{ redactor.username }}</a></td>
+{#  {% if redactor_list %}#}
+{#    <table class="table">#}
+{#      <tr>#}
+{#        <th>Username</th>#}
+{#        <th>First name</th>#}
+{#        <th>Last name</th>#}
+{#        <th>Experience</th>#}
+{#      </tr>#}
+{#    {% for redactor in redactor_list %}#}
+{#      <tr>#}
+{#        <td><a href="#">{{ redactor.username }}</a></td>#}
 {#        <td><a href="{{ driver.get_absolute_url }}">{{ driver.username }}</a></td>#}
-        <td>{{ redactor.first_name }}</td>
-        <td>{{ redactor.last_name }}</td>
-        <td>{{ redactor.years_of_experience }}</td>
-      </tr>
-    {% endfor %}
-
-    </table>
-  {% else %}
-    <p>There are no redactors in the service.</p>
-  {% endif %}
-{% endblock %}
+{#        <td>{{ redactor.first_name }}</td>#}
+{#        <td>{{ redactor.last_name }}</td>#}
+{#        <td>{{ redactor.years_of_experience }}</td>#}
+{#      </tr>#}
+{#    {% endfor %}#}
+{##}
+{#    </table>#}
+{#  {% else %}#}
+{#    <p>There are no redactors in the service.</p>#}
+{#  {% endif %}#}
+{#{% endblock %}#}

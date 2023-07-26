@@ -35,16 +35,14 @@ class TopicListView(generic.ListView):
     model = Topic
     context_object_name = "topic_list"
     template_name = "newspaper/topics_list.html"
-    paginate_by = 5
 
 
 class RedactorListView(generic.ListView):
     model = Redactor
     template_name = "newspaper/redactor_list.html"
-    paginate_by = 5
 
 
 class NewspaperListView(generic.ListView):
     model = Newspaper
     template_name = "newspaper/newspaper_list.html"
-    paginate_by = 5
+    paginate_by = 4

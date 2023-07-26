@@ -1,29 +1,57 @@
+{% load static %}
 <!DOCTYPE html>
-<html class="no-js" lang="en">
+<html lang="en" itemscope itemtype="http://schema.org/WebPage">
 
 <head>
-  <meta name="description" content="Clasico - Agency and Portfolio Template">
-	<meta name="keywords" content="Clasico, portfolio, wordpress, html, css, theme">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta name="LegendTheme" content="legendtheme">
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	{% block title %}<title>Time News</title>{% endblock %}
 
-  {% load static %}
-  <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
-  <link rel="stylesheet" type="text/css" href="{% static 'css/font-awesome.min.css' %}">
-  <link rel="stylesheet" type="text/css" href="{% static 'css/ionicons.css' %}">
-  <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<link rel="apple-touch-icon" sizes="76x76" href="{% static 'img/apple-icon.png' %}">
+<link rel="icon" type="image/png" href="{% static 'img/favicon.png' %}">
+
+<title>
+  Time News
+</title>
+<!--     Fonts and icons     -->
+<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
+
+<!-- Nucleo Icons -->
+<link href="{% static 'css/nucleo-icons.css' %}" rel="stylesheet" />
+<link href="{% static 'css/nucleo-svg.css' %}" rel="stylesheet" />
+
+<!-- Font Awesome Icons -->
+<script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
+<link href="{% static 'css/nucleo-svg.css' %}" rel="stylesheet" />
+
+<!-- CSS Files -->
+<link id="pagestyle" href="{% static 'css/soft-design-system.css' %}" rel="stylesheet" />
 </head>
 
-<body>
+<body
+    {% block body %}{% endblock body %} >
+
   {% block header %}
-    {% include "includes/header.html" %}
+
+    {% include 'includes/navigation.html' %}
+
+  {% endblock header %}
+
+  {% block content %}{% endblock content %}
+
+  {% block pagination %}
+      {% include "includes/pagination.html" %}
   {% endblock %}
 
-  {% block content %}{% endblock %}
+  {% block footer %}
 
-  {% block pagination %}{% endblock %}
+    {% include 'includes/footer_background.html' %}
+
+  {% endblock footer %}
+
+  {% include 'includes/scripts.html' %}
+
+  {% block javascripts %}{% endblock javascripts %}
 
 </body>
 </html>
