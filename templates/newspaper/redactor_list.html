@@ -7,10 +7,15 @@
 
 {% block content %}
 
-  <!-- START Testimonials w/ user image & text & info -->
   <section class="py-sm-7 py-5 position-relative">
     <div class="container">
       <div class="row">
+        {% if user.is_authenticated %}
+          <a href="{% url 'catalog:redactor-create' %}" class="btn btn-primary link-to-page">
+            Create redactor
+          </a>
+        {% endif %}
+
         <div class="col-12 mx-auto">
           <div class="row py-lg-7 py-5">
             <div class="col-lg-3 col-md-5 position-relative my-auto">
@@ -41,7 +46,7 @@
                 and positive attitude make her happy to communicate with her every time.
                 Julia is a true expert and working with her is a real pleasure.
                 I recommend her to everyone who is looking for a reliable partner and a
-                professional in their field! <br><a href="javascript:;" class="text-info icon-move-right">More about me
+                professional in their field! <br><a href="{% url 'catalog:redactor-detail' pk=5 %}" class="text-info icon-move-right">More about me
                   <i class="fas fa-arrow-right text-sm ms-1"></i>
                 </a>
               </p>
@@ -56,7 +61,50 @@
         <div class="col-12 mx-auto">
           <div class="row py-lg-7 py-5">
             <div class="col-lg-3 col-md-5 position-relative my-auto">
-              <img class="img border-radius-lg max-width-200 w-100 position-relative z-index-2" src="{% static 'img/photo/black_widow.jpg' %}" alt="scarlett">
+              <img class="img border-radius-lg max-width-200 w-100 position-relative z-index-2" src="{% static 'img/photo/Sheril Blossom.jpg' %}" alt="sherill">
+            </div>
+            <div class="col-lg-7 col-md-7 z-index-2 position-relative px-md-2 px-sm-5 mt-sm-0 mt-4">
+              <div class="d-flex justify-content-between align-items-center mb-2">
+                <h4 class="mb-0">Sherill Blossom</h4>
+              </div>
+              <div class="row mb-4">
+                <div class="col-auto">
+                  <span class="h6">48</span>
+                  <span>Posts</span>
+                </div>
+                <div class="col-auto">
+                  <span class="h6">3.1k</span>
+                  <span>Followers</span>
+                </div>
+                <div class="col-auto">
+                  <span class="h6">5+</span>
+                  <span>Rating</span>
+                </div>
+              </div>
+              <p class="text-lg mb-0">
+                Sherill is just a wonderful person! Her enthusiasm,
+                caring and dedication to her work is admirable. She is a
+                true professional who can be trusted with the most difficult
+                tasks and she always goes above and beyond her duties to achieve
+                success. Sherill is also an amazing communicator and a wonderful
+                colleague. It is always easy and pleasant to work with her.
+                I wholeheartedly recommend Sherill to anyone who is looking for
+                an outstanding specialist and reliable partner! <br><a href="{% url 'catalog:redactor-detail' pk=3 %}" class="text-info icon-move-right">More about me
+                  <i class="fas fa-arrow-right text-sm ms-1"></i>
+                </a>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="row">
+        <div class="col-12 mx-auto">
+          <div class="row py-lg-7 py-5">
+            <div class="col-lg-3 col-md-5 position-relative my-auto">
+              <img class="img border-radius-lg max-width-200 w-100 position-relative z-index-2" src="{% static 'img/photo/Harli Queen.jpg' %}" alt="scarlett">
             </div>
             <div class="col-lg-7 col-md-7 z-index-2 position-relative px-md-2 px-sm-5 mt-sm-0 mt-4">
               <div class="d-flex justify-content-between align-items-center mb-2">
@@ -85,7 +133,7 @@
                 with her ideas and positive. Working with her is a real
                 pleasure and privilege. Without a doubt, I recommend
                 Scarlett as a reliable and talented professional,
-                with whom cooperation exceeds all expectations! <br><a href="javascript:;" class="text-info icon-move-right">More about me
+                with whom cooperation exceeds all expectations! <br><a href="{% url 'catalog:redactor-detail' pk=2 %}" class="text-info icon-move-right">More about me
                   <i class="fas fa-arrow-right text-sm ms-1"></i>
                 </a>
               </p>
@@ -129,7 +177,7 @@
                 Working with him is inspiration and confidence in the
                 success of the project. I recommend Tom to anyone who is
                 looking for an experienced and responsible specialist who
-                is ready to bring the maximum benefit to his efforts! <br><a href="javascript:;" class="text-info icon-move-right">More about me
+                is ready to bring the maximum benefit to his efforts! <br><a href="{% url 'catalog:redactor-detail' pk=4 %}" class="text-info icon-move-right">More about me
                   <i class="fas fa-arrow-right text-sm ms-1"></i>
                 </a>
               </p>
@@ -138,39 +186,7 @@
         </div>
       </div>
     </div>
+
   </section>
+
 {% endblock content %}
-
-
-
-{#{% extends "base.html" %}#}
-{##}
-{#{% block content %}#}
-{#  <h1>#}
-{#    Redactor list#}
-{#  </h1>#}
-{#  {% include "includes/search_table.html" %}#}
-
-{#  {% if redactor_list %}#}
-{#    <table class="table">#}
-{#      <tr>#}
-{#        <th>Username</th>#}
-{#        <th>First name</th>#}
-{#        <th>Last name</th>#}
-{#        <th>Experience</th>#}
-{#      </tr>#}
-{#    {% for redactor in redactor_list %}#}
-{#      <tr>#}
-{#        <td><a href="#">{{ redactor.username }}</a></td>#}
-{#        <td><a href="{{ driver.get_absolute_url }}">{{ driver.username }}</a></td>#}
-{#        <td>{{ redactor.first_name }}</td>#}
-{#        <td>{{ redactor.last_name }}</td>#}
-{#        <td>{{ redactor.years_of_experience }}</td>#}
-{#      </tr>#}
-{#    {% endfor %}#}
-{##}
-{#    </table>#}
-{#  {% else %}#}
-{#    <p>There are no redactors in the service.</p>#}
-{#  {% endif %}#}
-{#{% endblock %}#}

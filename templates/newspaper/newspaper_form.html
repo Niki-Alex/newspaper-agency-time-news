@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <br><br><br>
+  <section class="py-3">
+    <div class="container">
+      <h1>{{ object|yesno:"Update,Create" }} newspaper</h1>
+      <form action="" method="post" novalidate>
+        {% csrf_token %}
+        {{ form.as_p }}
+
+        <input type="submit" value="Submit" class="btn btn-primary">
+      </form>
+    </div>
+  </section>
+{% endblock %}

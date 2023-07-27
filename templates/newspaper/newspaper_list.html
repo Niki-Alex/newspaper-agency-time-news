@@ -1,5 +1,4 @@
 {% extends "base.html" %}
-{% load static %}
 
 {% block title %} Newspaper list {% endblock title %}
 
@@ -11,13 +10,16 @@
   <br>
   <br>
 
-
-    <!-- START Blogs w/ 4 cards w/ image & text & link -->
   <section class="py-3">
     <div class="container">
       <div class="row">
         <div class="col-lg-6">
           <h3 class="mb-5">All news:</h3>
+          {% if user.is_authenticated %}
+            <a href="{% url 'catalog:newspaper-create' %}" class="btn btn-primary link-to-page">
+              Create news
+            </a>
+          {% endif %}
         </div>
       </div>
 
@@ -27,7 +29,7 @@
             <div class="card card-plain card-blog">
               <div class="card-body px-0">
                 <h5>
-                  <a href="javascript:;" class="text-dark font-weight-bold">{{ newspaper.title }}</a>
+                  <a href="{% url 'catalog:newspaper-detail' pk=newspaper.id %}" class="text-dark font-weight-bold">{{ newspaper.title }}</a>
                 </h5>
                 <p>
                   {{ newspaper.content|truncatewords:20 }}
@@ -44,7 +46,7 @@
                 <p>
                   <em>{{ newspaper.published_date }}</em>
                 </p>
-                <a href="javascript:;" class="text-info icon-move-right">Read More
+                <a href="{% url 'catalog:newspaper-detail' pk=newspaper.id %}" class="text-info icon-move-right">Read More
                   <i class="fas fa-arrow-right text-sm"></i>
                 </a>
               </div>
@@ -54,40 +56,5 @@
       </div>
     </div>
   </section>
-  <!-- END Blogs w/ 4 cards w/ image & text & link -->
-
 
 {% endblock content %}
-
-
-
-{#{% extends "base.html" %}#}
-{##}
-{#{% block content %}#}
-{#  <h1>#}
-{#    Newspaper list#}
-{#  </h1>#}
-{#  {% include "includes/search_table.html" %}#}
-{##}
-{#  {% if newspaper_list %}#}
-{#    <table class="table">#}
-{#      <tr>#}
-{#        <th>Title</th>#}
-{#        <th>Topic</th>#}
-{#        <th>Content</th>#}
-{#        <th>Published</th>#}
-{#        <th>Detail</th>#}
-{#      </tr>#}
-{#    {% for newspaper in newspaper_list %}#}
-{#      <tr>#}
-{#        <td>{{ newspaper.title }}</td>#}
-{#        <td>{{ newspaper.topic }}</td>#}
-{#        <td>{{ newspaper.content }}</td>#}
-{#        <td>{{ newspaper.published_date }}</td>#}
-{#        <td><a href="#">Detail</a></td>#}
-{#        <td><a href="{% url 'taxi:car-detail' pk=car.id %}">Detail</a></td>#}
-{#      </tr>#}
-{#    {% endfor %}#}
-{#    </table>#}
-{#  {% endif %}#}
-{#{% endblock %}#}

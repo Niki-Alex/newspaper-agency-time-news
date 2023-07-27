@@ -6,14 +6,13 @@ from django.views import generic
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 from .models import Topic, Redactor, Newspaper
-# from .forms import (
-#     DriverCreationForm,
-#     DriverLicenseUpdateForm,
-#     CarForm,
-#     DriverSearchForm,
-#     CarSearchForm,
-#     ManufacturerSearchForm
-# )
+from .forms import (
+    RedactorCreationForm,
+    NewspaperForm,
+    # DriverSearchForm,
+    # CarSearchForm,
+    # ManufacturerSearchForm
+)
 
 
 @login_required
@@ -33,8 +32,29 @@ def home_page(request):
 
 class TopicListView(generic.ListView):
     model = Topic
+    paginate_by = 5
     context_object_name = "topic_list"
-    template_name = "newspaper/topics_list.html"
+    template_name = "newspaper/topic_list.html"
+
+
+class TopicCreateView(LoginRequiredMixin, generic.CreateView):
+    model = Topic
+    fields = "__all__"
+    success_url = reverse_lazy("catalog:topic-list")
+    template_name = "newspaper/topic_form.html"
+
+
+class TopicUpdateView(LoginRequiredMixin, generic.UpdateView):
+    model = Topic
+    fields = "__all__"
+    success_url = reverse_lazy("catalog:topic-list")
+    template_name = "newspaper/topic_form.html"
+
+
+class TopicDeleteView(LoginRequiredMixin, generic.DeleteView):
+    model = Topic
+    success_url = reverse_lazy("catalog:topic-list")
+    template_name = "newspaper/topic_confirm_delete.html"
 
 
 class RedactorListView(generic.ListView):
@@ -42,7 +62,54 @@ class RedactorListView(generic.ListView):
     template_name = "newspaper/redactor_list.html"
 
 
+class RedactorDetailView(generic.DetailView):
+    model = Redactor
+    queryset = Redactor.objects.all().prefetch_related("newspapers__topic")
+    template_name = "newspaper/redactor_detail.html"
+
+
+class RedactorCreateView(LoginRequiredMixin, generic.CreateView):
+    model = Redactor
+    form_class = RedactorCreationForm
+    template_name = "newspaper/redactor_form.html"
+
+
 class NewspaperListView(generic.ListView):
     model = Newspaper
     template_name = "newspaper/newspaper_list.html"
     paginate_by = 4
+
+
+class NewspaperDetailView(generic.DetailView):
+    model = Newspaper
+    template_name = "newspaper/newspaper_detail.html"
+
+
+class NewspaperCreateView(LoginRequiredMixin, generic.CreateView):
+    model = Newspaper
+    form_class = NewspaperForm
+    success_url = reverse_lazy("catalog:newspaper-list")
+    template_name = "newspaper/newspaper_form.html"
+
+
+class NewspaperUpdateView(LoginRequiredMixin, generic.UpdateView):
+    model = Newspaper
+    form_class = NewspaperForm
+    success_url = reverse_lazy("catalog:newspaper-list")
+    template_name = "newspaper/newspaper_form.html"
+
+
+class NewspaperDeleteView(LoginRequiredMixin, generic.DeleteView):
+    model = Newspaper
+    success_url = reverse_lazy("catalog:newspaper-list")
+    template_name = "newspaper/newspaper_confirm_delete.html"
+
+
+@login_required
+def toggle_assign_to_news(request, pk):
+    redactor = Redactor.objects.get(id=request.user.id)
+    if Newspaper.objects.get(id=pk) in redactor.newspapers.all():
+        redactor.newspapers.remove(pk)
+    else:
+        redactor.newspapers.add(pk)
+    return HttpResponseRedirect(reverse_lazy("catalog:newspaper-detail", args=[pk]))
