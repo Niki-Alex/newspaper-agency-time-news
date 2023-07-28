@@ -45,23 +45,25 @@
           </div>
         </div>
       </div>
-      <div class="justify-content-end">
-        <a href="{% url 'catalog:newspaper-delete' pk=newspaper.id %}" class="btn btn-danger link-to-page">
-          Delete
-        </a>
-        <a href="{% url 'catalog:newspaper-update' pk=newspaper.id %}" class="btn btn-secondary link-to-page">
-          Update
-        </a>
-        {% if newspaper in user.newspapers.all %}
-          <a href="{% url 'catalog:toggle-news-assign' pk=newspaper.id %}" class="btn btn-danger link-to-page">
-            Delete me from this article
+      {% if user.is_authenticated %}
+        <div class="justify-content-end">
+          <a href="{% url 'catalog:newspaper-delete' pk=newspaper.id %}" class="btn btn-danger link-to-page">
+            Delete
           </a>
-        {% else %}
-          <a href="{% url 'catalog:toggle-news-assign' pk=newspaper.id %}" class="btn btn-success link-to-page">
-            Assign me from this article
+          <a href="{% url 'catalog:newspaper-update' pk=newspaper.id %}" class="btn btn-secondary link-to-page">
+            Update
           </a>
-        {% endif %}
-      </div>
+          {% if newspaper in user.newspapers.all %}
+            <a href="{% url 'catalog:toggle-news-assign' pk=newspaper.id %}" class="btn btn-danger link-to-page">
+              Delete me from this article
+            </a>
+          {% else %}
+            <a href="{% url 'catalog:toggle-news-assign' pk=newspaper.id %}" class="btn btn-success link-to-page">
+              Assign me from this article
+            </a>
+          {% endif %}
+        </div>
+      {% endif %}
     </div>
   </section>
 {% endblock %}

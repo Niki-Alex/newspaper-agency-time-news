@@ -1,4 +1,5 @@
 from django.contrib.auth.decorators import login_required
+from django.db.models import Q
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse_lazy
@@ -8,14 +9,14 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import Topic, Redactor, Newspaper
 from .forms import (
     RedactorCreationForm,
+    RedactorUpdateExperienceForm,
     NewspaperForm,
-    # DriverSearchForm,
-    # CarSearchForm,
-    # ManufacturerSearchForm
+    RedactorSearchForm,
+    TopicSearchForm,
+    NewspaperSearchForm
 )
 
 
-@login_required
 def home_page(request):
     num_redactors = Redactor.objects.count()
     num_newspapers = Newspaper.objects.count()
@@ -35,6 +36,27 @@ class TopicListView(generic.ListView):
     paginate_by = 5
     context_object_name = "topic_list"
     template_name = "newspaper/topic_list.html"
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super(TopicListView, self).get_context_data(**kwargs)
+        name = self.request.GET.get("name", "")
+
+        context["search_form"] = TopicSearchForm(initial={
+            "name": name
+        })
+
+        return context
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        search_query = self.request.GET.get("q")
+
+        if search_query:
+            queryset = queryset.filter(
+                Q(name__icontains=search_query)
+            )
+
+        return queryset
 
 
 class TopicCreateView(LoginRequiredMixin, generic.CreateView):
@@ -59,7 +81,34 @@ class TopicDeleteView(LoginRequiredMixin, generic.DeleteView):
 
 class RedactorListView(generic.ListView):
     model = Redactor
+    paginate_by = 5
     template_name = "newspaper/redactor_list.html"
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super(RedactorListView, self).get_context_data(**kwargs)
+        username_ = self.request.GET.get("username", "")
+
+        context["search_form"] = RedactorSearchForm(initial={
+            "username": username_
+        })
+
+        return context
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        search_query = self.request.GET.get("q")
+
+        if search_query:
+            queryset = queryset.filter(
+                Q(username__icontains=search_query)
+            )
+
+        return queryset
+
+
+class RedactorTopListView(generic.ListView):
+    model = Redactor
+    template_name = "newspaper/redactor_top_3_list.html"
 
 
 class RedactorDetailView(generic.DetailView):
@@ -71,13 +120,48 @@ class RedactorDetailView(generic.DetailView):
 class RedactorCreateView(LoginRequiredMixin, generic.CreateView):
     model = Redactor
     form_class = RedactorCreationForm
+    success_url = reverse_lazy("catalog:redactor-list")
     template_name = "newspaper/redactor_form.html"
+
+
+class RedactorUpdateExperienceView(LoginRequiredMixin, generic.UpdateView):
+    model = Redactor
+    form_class = RedactorUpdateExperienceForm
+    template_name = "newspaper/redactor_form.html"
+    success_url = reverse_lazy("catalog:redactor-list")
+
+
+class RedactorDeleteView(LoginRequiredMixin, generic.DeleteView):
+    model = Redactor
+    template_name = "newspaper/redactor_confirm_delete.html"
+    success_url = reverse_lazy("catalog:redactor-list")
 
 
 class NewspaperListView(generic.ListView):
     model = Newspaper
     template_name = "newspaper/newspaper_list.html"
     paginate_by = 4
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super(NewspaperListView, self).get_context_data(**kwargs)
+        title = self.request.GET.get("title", "")
+
+        context["search_form"] = NewspaperSearchForm(initial={
+            "title": title
+        })
+
+        return context
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        search_query = self.request.GET.get("q")
+
+        if search_query:
+            queryset = queryset.filter(
+                Q(title__icontains=search_query)
+            )
+
+        return queryset
 
 
 class NewspaperDetailView(generic.DetailView):

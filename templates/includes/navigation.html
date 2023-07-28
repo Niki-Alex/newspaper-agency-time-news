@@ -25,7 +25,8 @@
               <li class="nav-item dropdown dropdown-hover mx-2">
                 <a class="nav-link ps-2 d-flex justify-content-between cursor-pointer align-items-center"
                   href="javascript:;" id="dropdownMenuPages" data-bs-toggle="dropdown" aria-expanded="false">
-                  Topics
+                  Redactors
+
                   <img src="{% static 'img/photo/down-arrow-dark.svg' %}" alt="down-arrow" class="arrow ms-1">
                 </a>
                 <div class="dropdown-menu dropdown-menu-animation dropdown-md p-3 border-radius-lg mt-0 mt-lg-3"
@@ -56,25 +57,13 @@
                           </svg>
                         </div>
                       </div>
-                      Name
+                      More
                     </div>
-                    <a href="{% url 'catalog:topic-list' %}" class="dropdown-item border-radius-md">
-                      <span class="ps-3">Politics</span>
+                    <a href="{% url 'catalog:redactor-top-list' %}" class="dropdown-item border-radius-md">
+                      <span class="ps-3">Top 3 redactors</span>
                     </a>
-                    <a href="{% url 'catalog:topic-list' %}" class="dropdown-item border-radius-md">
-                      <span class="ps-3">Crime</span>
-                    </a>
-                    <a href="{% url 'catalog:topic-list' %}" class="dropdown-item border-radius-md">
-                      <span class="ps-3">Bussines</span>
-                    </a>
-                    <a href="{% url 'catalog:topic-list' %}" class="dropdown-item border-radius-md">
-                      <span class="ps-3">Art</span>
-                    </a>
-                    <a href="{% url 'catalog:topic-list' %}" class="dropdown-item border-radius-md">
-                      <span class="ps-3">Trade</span>
-                    </a>
-                    <a href="{% url 'catalog:topic-list' %}" class="dropdown-item border-radius-md">
-                      <span class="ps-3">Weather</span>
+                    <a href="{% url 'catalog:redactor-list' %}" class="dropdown-item border-radius-md">
+                      <span class="ps-3">All redactors</span>
                     </a>
                   </div>
                 </div>
@@ -82,8 +71,8 @@
 
               <li class="nav-item dropdown dropdown-hover mx-2">
                 <a class="nav-link ps-2 d-flex justify-content-between cursor-pointer align-items-center"
-                  href="{% url 'catalog:redactor-list' %}" aria-expanded="false">
-                  Redactors
+                  href="{% url 'catalog:topic-list' %}" aria-expanded="false">
+                  Topics
                 </a>
               </li>
 
@@ -97,7 +86,7 @@
               {% if request.user.is_authenticated %}
               <li class="nav-item ms-lg-auto">
                 <a class="nav-link nav-link-icon me-2"
-                  href="#">
+                  href="{% url 'logout' %}">
                   <i class="fa fa-sign-out me-1"></i>
                   <p class="d-inline text-sm z-index-1 font-weight-bold" data-bs-toggle="tooltip"
                     data-bs-placement="bottom" title="Logout">Logout</p>
@@ -106,7 +95,7 @@
               {% else %}
               <li class="nav-item ms-lg-auto">
                 <a class="nav-link nav-link-icon me-2"
-                  href="#">
+                  href="{% url 'login' %}">
                   <i class="fa fa-sign-in me-1"></i>
                   <p class="d-inline text-sm z-index-1 font-weight-bold" data-bs-toggle="tooltip"
                     data-bs-placement="bottom" title="Login">Login</p>

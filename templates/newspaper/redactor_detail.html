@@ -12,13 +12,10 @@
         <h1>
           Username: {{ redactor.username }}
           <div class="justify-content-end">
-            <a href="#" class="btn btn-danger link-to-page">
-  {#          <a href="{% url 'taxi:driver-delete' pk=driver.id %}" class="btn btn-danger link-to-page">#}
+            <a href="{% url 'catalog:redactor-delete' pk=redactor.id %}" class="btn btn-danger link-to-page">
               Delete
             </a>
-
-            <a href="#" class="btn btn-secondary link-to-page">
-  {#          <a href="{% url 'taxi:driver-update' pk=driver.id %}" class="btn btn-secondary link-to-page">#}
+            <a href="{% url 'catalog:redactor-update' pk=redactor.id %}" class="btn btn-secondary link-to-page">
               Update experience
             </a>
           </div>

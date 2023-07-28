@@ -4,7 +4,7 @@
   <br><br><br>
   <section class="py-3">
     <div class="container">
-      <h1>Create redactor</h1>
+      <h1>{{ object|yesno:"Update,Create" }} redactor</h1>
       <form action="" method="post" novalidate>
         {% csrf_token %}
         {{ form.as_p }}

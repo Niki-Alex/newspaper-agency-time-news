@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+  <br><br><br>
+  <section class="py-3">
+    <div class="page-header section-height-85">
+      <div>
+        <img class="position-absolute fixed-top ms-auto w-50 h-100 z-index-0 d-none d-sm-none d-md-block border-radius-section border-top-end-radius-0 border-top-start-radius-0 border-bottom-end-radius-0" img src="{% static 'img/photo/news.jpg' %}" alt="news">
+      </div>
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-7 d-flex justify-content-center flex-column">
+            <div class="card d-flex blur justify-content-center p-4 shadow-lg my-sm-0 my-sm-6 mt-8 mb-5">
+              <div class="text-center">
+                <h3 class="text-gradient text-primary">
+                  Logged out!
+                </h3>
+                <p class="mb-0">
+                  <a href="{% url 'login'%}">Click here to login again.</a>
+                </p>
+              </div>
+              <form role="form" id="contact-form" method="post" autocomplete="off">
+                <div class="row">
+                  <div class="col-md-12 text-center">
+                    <a href="{% url 'catalog:home-page' %}" class="btn bg-gradient-primary mt-3 mb-0">HOME</a>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+{% endblock %}

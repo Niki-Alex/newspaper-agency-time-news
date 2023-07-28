@@ -9,6 +9,8 @@
   <div class="container py-5">
     <div class="row">
 
+    {% include "includes/search_table.html" %}
+
       <div class="col-lg-6">
         <h3 class="mb-5">All topics:</h3>
         {% if user.is_authenticated %}
@@ -22,8 +24,10 @@
         <table class="table">
           <tr>
             <th>Name</th>
+            {% if user.is_authenticated %}
             <th>Update</th>
             <th>Delete</th>
+            {% endif %}
           </tr>
 
         {% for topic in topic_list %}
@@ -33,6 +37,7 @@
                 <strong>{{ topic.name }}</strong>
               </div>
             </td>
+            {% if user.is_authenticated %}
             <td>
               <a href="{% url 'catalog:topic-update' pk=topic.pk %}" class="btn btn-secondary link-to-page">
                 Update
@@ -43,6 +48,7 @@
                 Delete
               </a>
             </td>
+            {% endif %}
           </tr>
         {% endfor %}
         </table>

@@ -12,6 +12,9 @@
 
   <section class="py-3">
     <div class="container">
+
+    {% include "includes/search_table.html" %}
+
       <div class="row">
         <div class="col-lg-6">
           <h3 class="mb-5">All news:</h3>
@@ -23,37 +26,41 @@
         </div>
       </div>
 
-      <div class="row">
-        {% for newspaper in newspaper_list %}
-          <div class="col-lg-3 col-sm-6">
-            <div class="card card-plain card-blog">
-              <div class="card-body px-0">
-                <h5>
-                  <a href="{% url 'catalog:newspaper-detail' pk=newspaper.id %}" class="text-dark font-weight-bold">{{ newspaper.title }}</a>
-                </h5>
-                <p>
-                  {{ newspaper.content|truncatewords:20 }}
-                </p>
-                <p>
-                  <strong>Redactors:</strong><br>
-                  {% for publisher in newspaper.publishers.all %}
-                     <em>{{ publisher.first_name }} {{ publisher.last_name }}</em><br>
-                  {% endfor %}
-                </p>
-                <p>
-                  <strong>Topic: </strong><em>{{ newspaper.topic }}</em>
-                </p>
-                <p>
-                  <em>{{ newspaper.published_date }}</em>
-                </p>
-                <a href="{% url 'catalog:newspaper-detail' pk=newspaper.id %}" class="text-info icon-move-right">Read More
-                  <i class="fas fa-arrow-right text-sm"></i>
-                </a>
+      {% if newspaper_list %}
+        <div class="row">
+          {% for newspaper in newspaper_list %}
+            <div class="col-lg-3 col-sm-6">
+              <div class="card card-plain card-blog">
+                <div class="card-body px-0">
+                  <h5>
+                    <a href="{% url 'catalog:newspaper-detail' pk=newspaper.id %}" class="text-dark font-weight-bold">{{ newspaper.title }}</a>
+                  </h5>
+                  <p>
+                    {{ newspaper.content|truncatewords:20 }}
+                  </p>
+                  <p>
+                    <strong>Redactors:</strong><br>
+                    {% for publisher in newspaper.publishers.all %}
+                       <em>{{ publisher.first_name }} {{ publisher.last_name }}</em><br>
+                    {% endfor %}
+                  </p>
+                  <p>
+                    <strong>Topic: </strong><em>{{ newspaper.topic }}</em>
+                  </p>
+                  <p>
+                    <em>{{ newspaper.published_date }}</em>
+                  </p>
+                  <a href="{% url 'catalog:newspaper-detail' pk=newspaper.id %}" class="text-info icon-move-right">Read More
+                    <i class="fas fa-arrow-right text-sm"></i>
+                  </a>
+                </div>
               </div>
             </div>
-          </div>
-        {% endfor %}
-      </div>
+          {% endfor %}
+        {% else %}
+          <p>There are no news in the service.</p>
+        </div>
+      {% endif %}
     </div>
   </section>
 

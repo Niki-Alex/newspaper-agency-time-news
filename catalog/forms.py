@@ -25,3 +25,30 @@ class RedactorCreationForm(UserCreationForm):
             "first_name",
             "last_name",
         )
+
+
+class RedactorUpdateExperienceForm(forms.ModelForm):
+    class Meta:
+        model = Redactor
+        fields = ["years_of_experience"]
+
+
+class RedactorSearchForm(forms.Form):
+    username = forms.CharField(
+        max_length=255,
+        required=False
+    )
+
+
+class TopicSearchForm(forms.Form):
+    username = forms.CharField(
+        max_length=255,
+        required=False
+    )
+
+
+class NewspaperSearchForm(forms.Form):
+    username = forms.CharField(
+        max_length=255,
+        required=False
+    )
