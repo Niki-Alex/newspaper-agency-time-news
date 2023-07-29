@@ -113,7 +113,9 @@ class RedactorTopListView(generic.ListView):
 
 class RedactorDetailView(generic.DetailView):
     model = Redactor
-    queryset = Redactor.objects.all().prefetch_related("newspapers__topic")
+    queryset = Redactor.objects.all().prefetch_related(
+        "newspapers__topic"
+    )
     template_name = "newspaper/redactor_detail.html"
 
 
@@ -196,4 +198,6 @@ def toggle_assign_to_news(request, pk):
         redactor.newspapers.remove(pk)
     else:
         redactor.newspapers.add(pk)
-    return HttpResponseRedirect(reverse_lazy("catalog:newspaper-detail", args=[pk]))
+    return HttpResponseRedirect(reverse_lazy(
+        "catalog:newspaper-detail", args=[pk])
+    )

@@ -17,8 +17,7 @@
   <link id="pagestyle" href="{% static 'css/soft-design-system.css' %}" rel="stylesheet" />
 </head>
 
-<body
-  {% block body %}{% endblock body %} >
+<body>
 
   {% block header %}
 
@@ -37,8 +36,6 @@
   {% endblock footer %}
 
   {% include 'includes/scripts.html' %}
-
-  {% block javascripts %}{% endblock javascripts %}
 
 </body>
 </html>

@@ -33,7 +33,8 @@
               <div class="card card-plain card-blog">
                 <div class="card-body px-0">
                   <h5>
-                    <a href="{% url 'catalog:newspaper-detail' pk=newspaper.id %}" class="text-dark font-weight-bold">{{ newspaper.title }}</a>
+                    <a href="{% url 'catalog:newspaper-detail' pk=newspaper.id %}"
+                       class="text-dark font-weight-bold">{{ newspaper.title }}</a>
                   </h5>
                   <p>
                     {{ newspaper.content|truncatewords:20 }}
@@ -50,7 +51,8 @@
                   <p>
                     <em>{{ newspaper.published_date }}</em>
                   </p>
-                  <a href="{% url 'catalog:newspaper-detail' pk=newspaper.id %}" class="text-info icon-move-right">Read More
+                  <a href="{% url 'catalog:newspaper-detail' pk=newspaper.id %}"
+                     class="text-info icon-move-right">Read More
                     <i class="fas fa-arrow-right text-sm"></i>
                   </a>
                 </div>

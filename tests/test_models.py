@@ -1,8 +1,6 @@
 from django.contrib.auth import get_user_model
 from django.test import TestCase
 
-from catalog.models import Redactor, Newspaper, Topic
-
 
 class ModelTests(TestCase):
     def test_redactor_str(self):
