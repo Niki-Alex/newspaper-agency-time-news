@@ -17,7 +17,7 @@ from .views import (
     NewspaperCreateView,
     NewspaperUpdateView,
     NewspaperDeleteView,
-    toggle_assign_to_news,
+    ToggleAssignToNewsView,
 )
 
 urlpatterns = [
@@ -99,7 +99,7 @@ urlpatterns = [
     ),
     path(
         "newspapers/<int:pk>/toggle-assign/",
-        toggle_assign_to_news,
+        ToggleAssignToNewsView.as_view(),
         name="toggle-news-assign"
     ),
 ]

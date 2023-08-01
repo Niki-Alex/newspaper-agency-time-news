@@ -1,9 +1,9 @@
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 from django.http import HttpResponseRedirect
-from django.shortcuts import render
+from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse_lazy
-from django.views import generic
+from django.views import generic, View
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 from .models import Topic, Redactor, Newspaper
@@ -191,13 +191,17 @@ class NewspaperDeleteView(LoginRequiredMixin, generic.DeleteView):
     template_name = "newspaper/newspaper_confirm_delete.html"
 
 
-@login_required
-def toggle_assign_to_news(request, pk):
-    redactor = Redactor.objects.get(id=request.user.id)
-    if Newspaper.objects.get(id=pk) in redactor.newspapers.all():
-        redactor.newspapers.remove(pk)
-    else:
-        redactor.newspapers.add(pk)
-    return HttpResponseRedirect(reverse_lazy(
-        "catalog:newspaper-detail", args=[pk])
-    )
+class ToggleAssignToNewsView(LoginRequiredMixin, View):
+    def get(self, request, pk):
+        redactor = Redactor.objects.get(id=request.user.id)
+        newspaper = get_object_or_404(Newspaper, id=pk)
+
+        if newspaper in redactor.newspapers.all():
+            redactor.newspapers.remove(newspaper)
+        else:
+            redactor.newspapers.add(newspaper)
+
+        return redirect(reverse_lazy(
+            "catalog:newspaper-detail",
+            args=[pk]
+        ))
