@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% load static %}
 
-{% block title %} Redactor detail {% endblock title %}
+{% block title %} News detail {% endblock title %}
 
 {% block content %}
 
@@ -54,13 +54,19 @@
             Update
           </a>
           {% if newspaper in user.newspapers.all %}
-            <a href="{% url 'catalog:toggle-news-assign' pk=newspaper.id %}" class="btn btn-danger link-to-page">
-              Delete me from this article
-            </a>
+            <form method="post" action="{% url 'catalog:toggle-news-assign' pk=newspaper.id %}">
+              {% csrf_token %}
+              <button type="submit" class="btn btn-danger link-to-page">
+                Delete me from this article
+              </button>
+            </form>
           {% else %}
-            <a href="{% url 'catalog:toggle-news-assign' pk=newspaper.id %}" class="btn btn-success link-to-page">
-              Assign me from this article
-            </a>
+            <form method="post" action="{% url 'catalog:toggle-news-assign' pk=newspaper.id %}">
+              {% csrf_token %}
+              <button type="submit" class="btn btn-success link-to-page">
+                Assign me from this article
+              </button>
+            </form>
           {% endif %}
         </div>
       {% endif %}

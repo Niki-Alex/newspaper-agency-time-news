@@ -1,6 +1,4 @@
-from django.contrib.auth.decorators import login_required
 from django.db.models import Q
-from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse_lazy
 from django.views import generic, View
@@ -192,7 +190,7 @@ class NewspaperDeleteView(LoginRequiredMixin, generic.DeleteView):
 
 
 class ToggleAssignToNewsView(LoginRequiredMixin, View):
-    def get(self, request, pk):
+    def post(self, request, pk):
         redactor = Redactor.objects.get(id=request.user.id)
         newspaper = get_object_or_404(Newspaper, id=pk)
 
