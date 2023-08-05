@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %} News detail {% endblock title %}
+
+{% block content %}
+
+  <section class="py-9">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-6">
+          <h3 class="text-gradient text-primary mb-0 mt-2">Title: {{ newspaper.title }}</h3>
+          <p>{{ newspaper.content }}</p>
+        </div>
+        <div class="col-lg-6 mt-lg-0 mt-5 ps-lg-0 ps-0">
+          <div class="p-3 info-horizontal">
+            <div class="icon icon-shape rounded-circle bg-gradient-primary shadow text-center">
+              <i class="fas fa-ship opacity-10"></i>
+            </div>
+            <div class="description ps-3">
+              <p class="mb-0">Topic: <br><strong>{{ newspaper.topic }}</strong></p>
+            </div>
+          </div>
+
+          <div class="p-3 info-horizontal">
+            <div class="icon icon-shape rounded-circle bg-gradient-primary shadow text-center">
+              <i class="fas fa-handshake opacity-10"></i>
+            </div>
+            <div class="description ps-3">
+              <p class="mb-0">
+                Publisher: <br>
+                {% for publisher in newspaper.publishers.all %}
+                   <strong>{{ publisher.first_name }} {{ publisher.last_name }}</strong><br>
+                {% endfor %}
+              </p>
+            </div>
+          </div>
+          <div class="p-3 info-horizontal">
+            <div class="icon icon-shape rounded-circle bg-gradient-primary shadow text-center">
+              <i class="fas fa-hourglass opacity-10"></i>
+            </div>
+            <div class="description ps-3">
+              <p class="mb-0">Published_date: <br><strong>{{ newspaper.published_date }}</strong></p>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% if user.is_authenticated %}
+        <div class="justify-content-end">
+          <a href="{% url 'catalog:newspaper-delete' pk=newspaper.id %}" class="btn btn-danger link-to-page">
+            Delete
+          </a>
+          <a href="{% url 'catalog:newspaper-update' pk=newspaper.id %}" class="btn btn-secondary link-to-page">
+            Update
+          </a>
+          {% if newspaper in user.newspapers.all %}
+            <form method="post" action="{% url 'catalog:toggle-news-assign' pk=newspaper.id %}">
+              {% csrf_token %}
+              <button type="submit" class="btn btn-danger link-to-page">
+                Delete me from this article
+              </button>
+            </form>
+          {% else %}
+            <form method="post" action="{% url 'catalog:toggle-news-assign' pk=newspaper.id %}">
+              {% csrf_token %}
+              <button type="submit" class="btn btn-success link-to-page">
+                Assign me from this article
+              </button>
+            </form>
+          {% endif %}
+        </div>
+      {% endif %}
+    </div>
+  </section>
+{% endblock %}

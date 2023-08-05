@@ -1,0 +1,43 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" itemscope itemtype="http://schema.org/WebPage">
+
+<head>
+
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <title>
+    Time News
+  </title>
+  <link rel="icon" type="image/jpg" sizes="32x32" href="{% static 'img/illustrations/science.jpg' %}">
+
+  <!--     Fonts and icons     -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
+
+  <!-- CSS Files -->
+  <link id="pagestyle" href="{% static 'css/soft-design-system.css' %}" rel="stylesheet" />
+</head>
+
+<body>
+
+  {% block header %}
+
+    {% include 'includes/navigation.html' %}
+
+  {% endblock header %}
+
+  {% block content %}{% endblock content %}
+
+  {% block pagination %}
+      {% include "includes/pagination.html" %}
+  {% endblock %}
+
+  {% block footer %}
+    {% include 'includes/footer_background.html' %}
+  {% endblock footer %}
+
+  {% include 'includes/scripts.html' %}
+
+</body>
+</html>

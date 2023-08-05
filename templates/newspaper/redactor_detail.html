@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block title %} Redactor detail {% endblock title %}
+
+{% block body %} class="blog-author bg-gray-100" {% endblock body %}
+
+{% block content %}
+
+  <section class="py-sm-7 py-5 position-relative">
+    <div class="container">
+      <div class="row">
+        <h1>
+          Username: {{ redactor.username }}
+          {% if user.is_authenticated %}
+            <div class="justify-content-end">
+              <a href="{% url 'catalog:redactor-delete' pk=redactor.id %}" class="btn btn-danger link-to-page">
+                Delete
+              </a>
+              <a href="{% url 'catalog:redactor-update' pk=redactor.id %}" class="btn btn-secondary link-to-page">
+                Update experience
+              </a>
+            </div>
+          {% endif %}
+        </h1>
+
+        <p><strong>First name:</strong> {{ redactor.first_name }}</p>
+        <p><strong>Last name:</strong> {{ redactor.last_name }}</p>
+        <p><strong>Experience:</strong> {{ redactor.years_of_experience }}</p>
+        <p><strong>Is staff:</strong> {{ redactor.is_staff }}</p>
+
+        <div class="ml-3">
+          <h4>Newspapers:</h4>
+
+          {% for newspaper in redactor.newspapers.all %}
+              <hr>
+              <p><strong>Title:</strong> {{ newspaper.title }}</p>
+              <p><strong>Topic:</strong> {{ newspaper.topic.name }}</p>
+              <p><strong>Published date:</strong> {{ newspaper.published_date }}</p>
+              <p class="text-muted"><strong>Id:</strong> {{newspaper.id}}</p>
+
+          {% empty %}
+            <p>No newspaper!</p>
+          {% endfor %}
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+{% endblock %}
